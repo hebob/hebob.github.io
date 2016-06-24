@@ -117,17 +117,10 @@
       var gistlist = document.getElementById('gistlist');
 
       httpRequest.onreadystatechange = function() {
-        console.log("statechange");
         if (httpRequest.readyState === XMLHttpRequest.DONE) {
-          console.log("request done");
           if (httpRequest.status === 200) {
-              // perfect!
-                console.log("200");
                 var data = JSON.parse(httpRequest.responseText)
-                console.log(data)
                 data.forEach(function(gist) {
-                  console.log(gist.description);
-                  console.log(gist.html_url);
                   var link = document.createElement("A")
                   link.href = gist.html_url
                   link.appendChild(document.createTextNode(gist.description));
@@ -139,7 +132,6 @@
               console.log("failed",httpRequest.status)
           }
         } else {
-            // still not ready
         }
       }
 
@@ -229,11 +221,9 @@
             if(sec.classList.contains("hidden")) {
               return;
             }
-            console.log(sec)
             var traverse = targetsection;
             while(traverse.previousElementSibling != null) {
               if(traverse.previousElementSibling == sec) {
-                console.log("UPPER",sec)
                 moveups.push(sec);
                 return
               } else {
@@ -243,7 +233,6 @@
             var traverse = targetsection;
             while(traverse.nextElementSibling != null) {
               if(traverse.nextElementSibling == sec) {
-                console.log("DOWNER",sec)
                 return
               } else {
                 traverse = traverse.nextElementSibling
