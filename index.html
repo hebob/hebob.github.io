@@ -1,27 +1,40 @@
 <html>
 <head>
+  <meta charset="utf-8" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css" rel="stylesheet">
   <link href="style.css" rel="stylesheet">
   <link href='https://fonts.googleapis.com/css?family=Heebo:300,800' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
 </head>
 <body class="site">
-  <div class="wrappernest">
+  <div class="wrappernest clearfix">
     <div class="partwrap one">
-      <h1>/_/_/_/_/_/_/_/_/_/</h1>
-      <h2>/_/_/_/_/_/_/_/_/_/_/_/_/</h2>
-      <h3>/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/</h3>
+      <h1>/_/_/_/_/_/_/_/</h1>
+      <h2>/_/_/_/_/_/_/_/_/_/_</h2>
+      <h3>/_/_/_/_/_/_/_/_/_/_/_/_/_</h3>
 
     </div>
     <div class="partwrap two">
-      <h2>/_/_/_/_/_/</h2>
-      <h3>/_/_/_/_/_/_/_</h3>
+      <h2>/_/_/_/_</h2>
+      <h3>/_/_/_/_/_</h3>
     </div>
     <div class="partwrap three">
-      <h3>/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/</h3>
+      <h3>/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_</h3>
     </div>
 
     <div class="canvas_wrapper">
-      <div id="myid" class="scaling-wrapper">
+
+      <div class="scaling-wrapper">
+        <div id="experiment">
+        <div id="cube">
+          <div class="face one"></div>
+          <div class="face two"></div>
+          <div class="face three"></div>
+          <div class="face four"></div>
+          <div class="face five"></div>
+          <div class="face six"></div>
+        </div>
+      </div>
       </div>
     </div>
   </div>
@@ -29,51 +42,245 @@
       <nav class="navbar clearfix">
         <img class="navbar__logo"src="logo.png"/>
         <div class="navbar__items">
-          <a class="navbar__link navbar__link--active" href="#">home</a></li>
-          <a class="navbar__link" href="#">music</a></li>
-          <a class="navbar__link" href="#">about</a></li>
+          <a class="navbar__link navbar__link--active" onclick="bringup('home');" href="javascript:void(0)">home</a></li>
+          <a class="navbar__link" onclick="bringup('social')" href="javascript:void(0)">social</a></li>
+          <a class="navbar__link" onclick="bringup('music')" href="javascript:void(0)">music</a></li>
+          <a class="navbar__link" onclick="bringup('about')" href="javascript:void(0)">about</a></li>
         </div>
       </nav>
       <div class="content">
-        <div class="news">
-          <h1>Blog</h1>
-          <div class="news__item">
-            <h2>Entry #1</h2>
-            <p>Entry number one</p>
+        <div class="subcontent home">
+          <div class="news">
+            <h1>News</h1>
+            <div class="news__item">
+              <h2>No news</h2>
+              <p>Nothing new</p>
+            </div>
+          </div>
+          <div class="news right">
+            <h1>Blog</h1>
+            <div class="news__item">
+              <h2>Blogging with gist</h2>
+              <div id="gistlist">
+              </div>
+            </div>
           </div>
         </div>
-        <div class="news right">
-          <h1>News</h1>
-          <div class="news__item">
-            <h2>No news</h2>
-            <p>Nothing new</p>
+        <div class="subcontent social">
+          <div class="news">
+            <h1>Social</h1>
+            <div class="news__item">
+              <h2>Me somewhere</h2>
+              <ul>
+                <li>twitter</li>
+                <li>linkedin</li>
+                <li>instagram</li>
+              </ul>
+            </div>
           </div>
         </div>
-        <p>content content content</p>
+        <div class="subcontent music hidden">
+          <div class="news">
+            <h1>Music</h1>
+            <div class="news__item">
+              <h2>Confident - Framework</h2>
+              <p>Check out >></p>
+                <div class="scaling-wrapper">
+                    <iframe id="ytplayer" type="text/html" width="640" height="390"
+                      src="https://www.youtube.com/embed/-x-vJuHEVgc?autoplay=0"
+                      frameborder="0"></iframe>
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="subcontent about hidden">
+          <div class="news">
+            <h1>About</h1>
+            <div class="news__item">
+              <h2>About me</h2>
+              <p>I am one dude from Finland</p>
+            </div>
+          </div>
+        </div>
       </div>
   </div>
-<script src="three.js"></script>
-  <script src="script.js"></script>
+  <div class="wrapper" style="padding-top: 20px">
+    <span style="padding-left: 20px;">hosted by github</span>
+  </div>
+
   <script>
     //something interesting..
+    // document.getElementById('gistlist')
+   (function() {
+
+      var httpRequest = new XMLHttpRequest();
+      var gistlist = document.getElementById('gistlist');
+
+      httpRequest.onreadystatechange = function() {
+        console.log("statechange");
+        if (httpRequest.readyState === XMLHttpRequest.DONE) {
+          console.log("request done");
+          if (httpRequest.status === 200) {
+              // perfect!
+                console.log("200");
+                var data = JSON.parse(httpRequest.responseText)
+                console.log(data)
+                data.forEach(function(gist) {
+                  console.log(gist.description);
+                  console.log(gist.html_url);
+                  var link = document.createElement("A")
+                  link.href = gist.html_url
+                  link.appendChild(document.createTextNode(gist.description));
+
+                  gistlist.appendChild(link)
+                })
+
+          } else {
+              console.log("failed",httpRequest.status)
+          }
+        } else {
+            // still not ready
+        }
+      }
+
+      httpRequest.open("GET",'http://api.github.com/users/hebob/gists', true);
+      httpRequest.send(null);
+
+    })();
 
     document.querySelectorAll('.wrappernest h1, .wrappernest h2, .wrappernest h3').forEach(function(target){
-      target.onmouseover = function() {
+
+      function searchItem() {
        var index = Math.floor(Math.random()*target.innerHTML.length)
+       var flag = Math.floor(Math.random()*2)
        var char = target.innerHTML.substr(index,1)
-       if(char == "/") {
-         char = "\\"
+       var charnext = target.innerHTML.substr(index + 1,1)
+       if(char == "/" && charnext != "s") {
+         char = "<span style='color:#00ffff;'>\\</span>"
        } else if (char == "_") {
-         char = "x"
+          char = flag == 1 ?  "<span style='color:#00ffff;'>°</span>": "<span style='color:#00ffff;'>%</span>"
        } else if (char == "\\") {
          char = "/"
-       } else if (char == "x") {
+       } else if (char == "°" || char == "%") {
          char = "_"
+       } else {
+         searchItem()
+         return;
        }
        target.innerHTML = target.innerHTML.substring(0,index) + char + target.innerHTML.substring(index + 1)
+      }
+
+      target.onmouseout = searchItem
+    });
+
+    var sections = ["home","music","about", "social"];
+
+    function fadeanim(target) {
+      return target.animate([
+                        { opacity: 0,
+                         height: '0px' },
+                        { opacity: 1,
+                          height: target.offsetHeight + 'px' }
+                      ], {
+                        duration: 200,
+                        iterations:1
+                      });
+    }
+
+    function offsetanim(target,pixels) {
+      return target.animate([
+                        { transform: 'translateY(' + pixels + 'px)' },
+                        { transform: 'translateY(0)' }
+                      ], {
+                        duration: 500,
+                        iterations:1
+                      });
+    }
+
+    function togglesingle(elements, target, clazz) {
+      elements.forEach(function(elem) {
+        if(elem.innerHTML == target) {
+          elem.classList.add(clazz);
+        } else {
+          elem.classList.remove(clazz);
+        }
+      })
+    };
+
+    function bringup(target) {
+
+      var classes = "." + sections.filter(function(sec) {return sec != target}).join(', .')
+      var content = document.querySelectorAll(".content")[0];
+      var targetsection = document.querySelectorAll("." + target)[0];
+      var nontargetedsections = document.querySelectorAll(classes);
+
+      var navbar_items = document.querySelectorAll(".navbar__link");
+
+      if (!!targetsection && targetsection != content.firstElementChild) {
+
+        togglesingle(navbar_items,target,'navbar__link--active');
+        if(targetsection.classList.contains("hidden")){
+             targetsection.classList.remove("hidden");
+             fadeanim(targetsection)
+        }
+
+        var moveups = [];
+        nontargetedsections.forEach(function(sec) {
+            if(sec.classList.contains("hidden")) {
+              return;
+            }
+            console.log(sec)
+            var traverse = targetsection;
+            while(traverse.previousElementSibling != null) {
+              if(traverse.previousElementSibling == sec) {
+                console.log("UPPER",sec)
+                moveups.push(sec);
+                return
+              } else {
+                traverse = traverse.previousElementSibling
+              }
+            }
+            var traverse = targetsection;
+            while(traverse.nextElementSibling != null) {
+              if(traverse.nextElementSibling == sec) {
+                console.log("DOWNER",sec)
+                return
+              } else {
+                traverse = traverse.nextElementSibling
+              }
+            }
+          });
+
+        var targetcurrentx = targetsection.offsetTop;
+
+        content.insertAdjacentElement('afterbegin',targetsection);
+
+
+        var move = targetsection.offsetHeight;
+
+        targetcurrentx = targetcurrentx - targetsection.offsetTop;
+
+        moveups.forEach(function(sec) {
+          offsetanim(sec,-move)
+        })
+
+        offsetanim(targetsection,targetcurrentx)
 
       }
-    });
+
+    }
+
+
+    var xAngle = 20, yAngle = 20;
+
+    setInterval(function() {
+      document.getElementById('cube').style.webkitTransform = "rotateX("+xAngle+"deg) rotateY("+yAngle+"deg)";
+      xAngle += 20;
+      yAngle += 20;
+    },500)
+
+
+
   </script>
 </body>
 </html>
