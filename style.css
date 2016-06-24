@@ -1,0 +1,163 @@
+.site {
+  background: #d7c7c7;
+  font-family: 'Heebo', sans-serif;
+}
+
+.wrappernest {
+  width:1000px;
+  margin: 0 auto;
+  position: relative;
+  padding: 20px;
+}
+
+.partwrap {
+  background: #fff;
+  box-shadow: 3px 3px 9px 1px rgba(0, 0, 0, 0.3);
+  padding: 0 20px 0 20px;
+  margin-top: 20px;
+  border: 1px solid grey;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.partwrap.one {
+  width: 25%;
+  margin-left: -20px;
+}
+
+.partwrap.two {
+  width: 10%;
+}
+
+.partwrap h1,
+.partwrap h2,
+.partwrap h3 {
+    overflow: hidden;
+}
+
+.partwrap.three {
+  width: 55.6%;
+    margin-right: -20px;
+}
+
+.wrapper {
+  background: #fff;
+  width:1000px;
+  margin: 0 auto;
+  box-shadow: 3px 3px 9px 1px rgba(0, 0, 0, 0.3);
+  padding: 0 20px 20px 20px;
+  margin-top: 20px;
+  border: 1px solid grey
+}
+
+.navbar__logo {
+  width: 31%;
+  margin-top: 20px;
+  display:inline-block;
+  vertical-align: top;
+}
+
+.navbar__items {
+  margin-left: 40%;
+  display:inline-block;
+  vertical-align: top;
+}
+
+.navbar__link {
+  color: black;
+  font-size: 20px;
+  display: inline-block;
+  text-decoration: none;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  padding: 10px;
+}
+
+.navbar__link.navbar__link--active {
+  border-top: 4px solid black;
+}
+
+.navbar__link:hover {
+  color: #00ffff;
+  border-color: #00ffff;
+}
+
+.canvas_wrapper {
+  width: 40%;
+  position: absolute;
+  right: 0;
+  bottom: -80px;
+  z-index: -1;
+}
+
+.scaling-wrapper {
+	position:relative;
+	padding-bottom:56.25%;
+	padding-top:30px;
+	height:0;
+	overflow:hidden;
+}
+
+.scaling-wrapper svg,
+.scaling-wrapper canvas {
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+}
+
+.content {
+  margin-top: 20px;
+}
+
+.news {
+  width: 49%;
+  display: inline-block;
+  background: #f2f1f0;
+  box-shadow: 2px 3px 6px 0px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  margin-top: 20px;
+  border: 1px solid grey;
+  box-sizing: border-box;
+  vertical-align: top;
+}
+
+.news.right {
+  margin-left: 1.5%;
+}
+
+.navitem:not(:first-child) {
+  margin-left:5px;
+}
+.navitem:not(:last-child) {
+  margin-right:5px;
+}
+
+.w50 {
+  width: 50%;
+  display: inline-block;
+}
+
+.w25 {
+  width: 25%;
+  display: inline-block;
+}
+
+.w75 {
+  width: 75%;
+  display: inline-block;
+}
+
+.w20 {
+  width: 20%;
+  display: inline-block;
+}
+
+.clearfix:after {
+    content: " ";
+    visibility: hidden;
+    display: block;
+    height: 0;
+    clear: both;
+}
